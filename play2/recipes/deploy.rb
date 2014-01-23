@@ -5,7 +5,7 @@
 
 node[:deploy].each do |application, deploy|
   opsworks_play2 do
-    app_name node[:opsworks][:applications][:name]
+    app_name node[:opsworks][:applications][0][:name]
     app application
     deploy_data deploy
   end
