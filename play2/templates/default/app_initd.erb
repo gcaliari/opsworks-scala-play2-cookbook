@@ -12,8 +12,6 @@ APPLICATION_NAME="<%= @name %>"
 APPLICATION_PATH="<%= @path %>"
 APP_OPTIONS="<%= @options %>"
 
-. /etc/init.d/functions
-
 RETVAL=0
 
 [ -d $APPLICATION_PATH/logs ] || exit 1
