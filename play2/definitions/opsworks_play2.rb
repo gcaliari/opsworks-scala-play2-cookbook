@@ -1,5 +1,6 @@
 define :opsworks_play2 do
     application = params[:app]
+    application_name = params[:app_name]
     deploy = params[:deploy_data]
 
     app_dir    = File.expand_path(File.join(deploy[:deploy_to], "current", deploy[:scm][:app_dir] || '.'))
@@ -131,7 +132,7 @@ define :opsworks_play2 do
             :path => app_dir,
             :deploy_to => deploy[:deploy_to],
             :options => play_options(),
-            :command => "start"
+            :command => application_name
           })
         end
 
