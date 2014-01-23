@@ -20,8 +20,6 @@ echo "path: <%= @path %>"
 echo "command: <%= @command %>"
 
 [ -d $APPLICATION_PATH/logs ] || exit 191
-[ -f $APPLICATION_PATH/<%= @command %> ] || exit 192
-
 [ -f $APPLICATION_PATH/logs/service.log ] || touch $APPLICATION_PATH/logs/service.log
 
 echo "went thought init"
