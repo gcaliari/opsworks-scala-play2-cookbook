@@ -14,10 +14,13 @@ APP_OPTIONS="<%= @options %>"
 
 RETVAL=0
 
-echo "name: <%= @name %>, path: <%= @path %>, options: <%= @options %>"
+echo "name: <%= @name %>"
+echo "options: <%= @options %>"
+echo "path: <%= @path %>"
+echo "command: <%= @command %>"
 
-[ -d $APPLICATION_PATH/logs ] || exit 1
-[ -f $APPLICATION_PATH/<%= @command %> ] || exit 1
+[ -d $APPLICATION_PATH/logs ] || exit 1991
+[ -f $APPLICATION_PATH/<%= @command %> ] || exit 1992
 
 [ -f $APPLICATION_PATH/logs/service.log ] || touch $APPLICATION_PATH/logs/service.log
 
