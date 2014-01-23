@@ -19,8 +19,8 @@ echo "options: <%= @options %>"
 echo "path: <%= @path %>"
 echo "command: <%= @command %>"
 
-[ -d $APPLICATION_PATH/logs ] || exit 1991
-[ -f $APPLICATION_PATH/<%= @command %> ] || exit 1992
+[ -d $APPLICATION_PATH/logs ] || exit 191
+[ -f $APPLICATION_PATH/<%= @command %> ] || exit 192
 
 [ -f $APPLICATION_PATH/logs/service.log ] || touch $APPLICATION_PATH/logs/service.log
 
@@ -28,7 +28,8 @@ echo "went thought init"
 
 start() {
     echo -n "Starting Play service: <%= @name %>" | tee -a $APPLICATION_PATH/logs/service.log
-    su $USER -c "exec ${APPLICATION_PATH}/<%= @command %> ${APP_OPTIONS} >> $APPLICATION_PATH/logs/service.log 2>&1 &"
+    su $USER "cd ${APPLICATION_PATH}"
+    su $USER -c "play <%= @command %> ${APP_OPTIONS} >> logs/service.log 2>&1 &"
     RETVAL=$?
 
     if [ $RETVAL -eq 0 ]; then

@@ -130,7 +130,7 @@ define :opsworks_play2 do
             :path => app_dir,
             :deploy_to => deploy[:deploy_to],
             :options => play_options(),
-            :command => "target/start"
+            :command => "start"
           })
         end
 
