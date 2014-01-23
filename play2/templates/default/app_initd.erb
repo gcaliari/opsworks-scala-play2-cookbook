@@ -11,14 +11,12 @@ APPLICATION_NAME="<%= @name %>"
 # Path to the application source
 APPLICATION_PATH="<%= @path %>"
 APP_OPTIONS="<%= @options %>"
-APP_SCRIPT="<%= @command %>"
 
 RETVAL=0
 
 echo "name: <%= @name %>"
 echo "options: <%= @options %>"
 echo "path: <%= @path %>"
-echo "command: <%= @command %>"
 
 [ -d $APPLICATION_PATH/logs ] || exit 191
 [ -f $APPLICATION_PATH/logs/service.log ] || touch $APPLICATION_PATH/logs/service.log
@@ -27,7 +25,7 @@ echo "went thought init"
 
 start() {
     echo -n "Starting Play service: <%= @name %>" | tee -a $APPLICATION_PATH/logs/service.log
-    su $USER -c "sudo ${APPLICATION_PATH}/target/universal/stage/bin/${APP_SCRIPT} ${APP_OPTIONS} >> ${APPLICATION_PATH}/logs/service.log 2>&1 &"
+    sudo (cd ${APPLICATION_PATH}; play start ${APP_OPTIONS} >> ${APPLICATION_PATH}/logs/service.log 2>&1) &
     RETVAL=$?
 
     if [ $RETVAL -eq 0 ]; then

@@ -1,6 +1,5 @@
 define :opsworks_play2 do
     application = params[:app]
-    application_name = params[:app_name]
     deploy = params[:deploy_data]
 
     app_dir    = File.expand_path(File.join(deploy[:deploy_to], "current", deploy[:scm][:app_dir] || '.'))
@@ -115,8 +114,7 @@ define :opsworks_play2 do
         execute "package #{application}" do
           cwd app_dir
           user "root"
-          command "play clean stage"
-          command "play stage"
+          command "play clean"
         end
 
         # Create the service for the application
@@ -131,8 +129,7 @@ define :opsworks_play2 do
             :name => application,
             :path => app_dir,
             :deploy_to => deploy[:deploy_to],
-            :options => play_options(),
-            :command => application_name
+            :options => play_options()
           })
         end
 
