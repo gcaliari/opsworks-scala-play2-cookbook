@@ -26,14 +26,13 @@ echo "went thought init"
 
 start() {
     echo -n "Starting Play service: <%= @name %>" | tee -a $APPLICATION_PATH/logs/service.log
-    su $USER "cd ${APPLICATION_PATH}"
-    su $USER -c "play <%= @command %> ${APP_OPTIONS} >> logs/service.log 2>&1 &"
+    su $USER -c "sudo ${APPLICATION_PATH}/target/universal/stage/bin/${APPLICATION_NAME} ${APP_OPTIONS} >> ${APPLICATION_PATH}/logs/service.log 2>&1 &"
     RETVAL=$?
 
     if [ $RETVAL -eq 0 ]; then
-        echo_success
+        echo "start success"
     else
-        echo_failure
+        echo "start failure"
     fi
     echo
 }
@@ -46,7 +45,7 @@ stop() {
         su $USER -c "kill -9 `cat $PID` ; rm -rf $PID"
     done
 
-    echo_success
+    echo "stop success"
     echo
 }
 
