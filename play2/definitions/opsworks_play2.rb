@@ -114,7 +114,7 @@ define :opsworks_play2 do
         execute "package #{application}" do
           cwd app_dir
           user "root"
-          command "play clean"
+          command "play clean compile &"
         end
 
         # Create the service for the application
