@@ -1,5 +1,5 @@
 define :opsworks_play2 do
-    application = params[:name]
+    application = params[:app]
     deploy = params[:deploy_data]
 
     app_dir    = File.expand_path(File.join(deploy[:deploy_to], "current", deploy[:scm][:app_dir] || '.'))

@@ -30,9 +30,9 @@ start() {
     RETVAL=$?
 
     if [ $RETVAL -eq 0 ]; then
-        echo "start success"
+        echo " start success "
     else
-        echo "start failure"
+        echo " start failure "
     fi
     echo
 }
@@ -45,7 +45,7 @@ stop() {
         su $USER -c "kill -9 `cat $PID` ; rm -rf $PID"
     done
 
-    echo "stop success"
+    echo " stop success "
     echo
 }
 
