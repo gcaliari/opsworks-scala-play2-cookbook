@@ -14,14 +14,8 @@ APP_OPTIONS="<%= @options %>"
 
 RETVAL=0
 
-echo "name: <%= @name %>"
-echo "options: <%= @options %>"
-echo "path: <%= @path %>"
-
 [ -d $APPLICATION_PATH/logs ] || exit 191
 [ -f $APPLICATION_PATH/logs/service.log ] || touch $APPLICATION_PATH/logs/service.log
-
-echo "went thought init"
 
 start() {
     echo -n "Starting Play service: <%= @name %>" | tee -a $APPLICATION_PATH/logs/service.log
