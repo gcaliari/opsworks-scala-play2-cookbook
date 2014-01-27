@@ -117,7 +117,7 @@ define :opsworks_play2 do
           # compile / stage command here will fail because it will not find a few libs
           # thus & is necessary. Libs will be found on any secondary compilation attempt 
           # usually when we start the server
-          command "play clean compile; true"
+          command "play clean compile; play stage; true"
         end
 
         # Create the service for the application

@@ -19,7 +19,7 @@ RETVAL=0
 
 start() {
     echo -n "Starting Play service: <%= @name %>" | tee -a $APPLICATION_PATH/logs/service.log
-    (cd ${APPLICATION_PATH}; su $USER -c "play start ${APP_OPTIONS} >> ${APPLICATION_PATH}/logs/service.log 2>&1 &")
+    (cd ${APPLICATION_PATH}/target/universal/stage; su $USER -c "bin/${APPLICATION_NAME} ${APP_OPTIONS} >> ${APPLICATION_PATH}/logs/service.log 2>&1 &")
     RETVAL=$?
 
     if [ $RETVAL -eq 0 ]; then
