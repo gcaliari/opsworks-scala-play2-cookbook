@@ -132,7 +132,6 @@ define :opsworks_play2 do
             :name => application,
             :path => app_dir,
             :deploy_to => deploy[:deploy_to],
-            :stage_script => play_script_name(),
             :options => play_options()
           })
         end
