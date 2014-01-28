@@ -11,15 +11,20 @@ APPLICATION_NAME="<%= @name %>"
 # Path to the application source
 APPLICATION_PATH="<%= @path %>"
 APP_OPTIONS="<%= @options %>"
+SCRIPT_NAME="<%= @script_name %>"
+APP_NAME="<%= @app_name %>"
 
 RETVAL=0
+
+echo "SCRIPT_NAME=<%= @script_name %>"
+echo "APP_NAME=<%= @app_name %>"
 
 [ -d $APPLICATION_PATH/logs ] || exit 191
 [ -f $APPLICATION_PATH/logs/service.log ] || touch $APPLICATION_PATH/logs/service.log
 
 start() {
     echo -n "Starting Play service: <%= @name %>" | tee -a $APPLICATION_PATH/logs/service.log
-    (cd ${APPLICATION_PATH}; su $USER -c "target/universal/stage/bin/${APPLICATION_NAME} ${APP_OPTIONS} >> ${APPLICATION_PATH}/logs/service.log 2>&1 &")
+    (cd ${APPLICATION_PATH}; su $USER -c "target/universal/stage/bin/${SCRIPT_NAME} ${APP_OPTIONS} >> ${APPLICATION_PATH}/logs/service.log 2>&1 &")
     RETVAL=$?
 
     if [ $RETVAL -eq 0 ]; then

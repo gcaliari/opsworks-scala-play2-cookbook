@@ -2,6 +2,10 @@ def play_options()
   return [default_play_options(), node[:play2][:options]].compact.join(" ")
 end
 
+def play_script_name()
+  return node[:play2][:script_name]
+end
+
 def default_play_options()
   options = []
 
