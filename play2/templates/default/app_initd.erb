@@ -12,12 +12,10 @@ APPLICATION_NAME="<%= @name %>"
 APPLICATION_PATH="<%= @path %>"
 APP_OPTIONS="<%= @options %>"
 SCRIPT_NAME="<%= @script_name %>"
-APP_NAME="<%= @app_name %>"
 
 RETVAL=0
 
-echo "SCRIPT_NAME=<%= @script_name %>"
-echo "APP_NAME=<%= @app_name %>"
+echo "-----------------------SCRIPT_NAME=<%= @script_name %>"
 
 [ -d $APPLICATION_PATH/logs ] || exit 191
 [ -f $APPLICATION_PATH/logs/service.log ] || touch $APPLICATION_PATH/logs/service.log

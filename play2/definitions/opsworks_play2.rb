@@ -1,7 +1,6 @@
 define :opsworks_play2 do
     application = params[:app]
     deploy = params[:deploy_data]
-    app_name = params[:app_name]
 
     app_dir    = File.expand_path(File.join(deploy[:deploy_to], "current", deploy[:scm][:app_dir] || '.'))
     shared_dir = File.join(deploy[:deploy_to], "shared")
@@ -131,7 +130,6 @@ define :opsworks_play2 do
             :path => app_dir,
             :deploy_to => deploy[:deploy_to],
             :script_name => play_script_name(),
-            :app_name => app_name,
             :options => play_options()
           })
         end
