@@ -114,10 +114,7 @@ define :opsworks_play2 do
         execute "package #{application}" do
           cwd app_dir
           user "root"
-          # compile / stage command here will fail because it will not find a few libs
-          # thus & is necessary. Libs will be found on any secondary compilation attempt 
-          # usually when we start the server
-          command "play clean compile; play stage; true"
+          command "sudo play clean compile ; sudo play stage ; true"
         end
 
         # Create the service for the application
