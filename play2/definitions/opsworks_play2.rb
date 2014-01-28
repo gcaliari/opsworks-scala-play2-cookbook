@@ -114,7 +114,7 @@ define :opsworks_play2 do
         execute "package #{application}" do
           cwd app_dir
           user "root"
-          command "sudo play clean compile ; true"
+          command "sudo play clean compile ; sudo play stage ; true"
         end
 
         # Create the service for the application
