@@ -12,6 +12,7 @@ version = node[:play2][:version]
 
 package "ntp" do
   action :install
+  options "-y"
 end
 
 artifact_deploy "play2" do
