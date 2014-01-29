@@ -2,6 +2,10 @@ def play_options()
   return [default_play_options(), node[:play2][:options]].compact.join(" ")
 end
 
+def newrelic_app_name()
+  return node[:play2][:conf][:newrelic][:config][:app_name]
+end
+
 def default_play_options()
   options = []
 

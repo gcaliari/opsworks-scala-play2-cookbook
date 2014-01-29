@@ -12,6 +12,8 @@ APPLICATION_NAME="<%= @name %>"
 APPLICATION_PATH="<%= @path %>"
 APP_OPTIONS="<%= @options %>"
 
+export NEW_RELIC_APP_NAME="<%= @newrelic_app_name %>"
+
 RETVAL=0
 
 [ -d $APPLICATION_PATH/logs ] || exit 191
