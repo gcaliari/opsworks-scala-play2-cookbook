@@ -91,16 +91,6 @@ define :opsworks_play2 do
           end
         end
 
-        # Create the logging configuration file
-        template ::File.join(app_dir, "conf/logger.xml") do
-          source "app_logging.erb"
-          cookbook "play2"
-          owner deploy[:user]
-          group deploy[:group]
-          mode  "0644"
-          backup false
-        end
-
         template "/etc/logrotate.d/opsworks_#{application}" do
           source "app_logrotate.erb"
           cookbook "play2"
