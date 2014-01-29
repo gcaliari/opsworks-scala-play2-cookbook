@@ -10,6 +10,10 @@ package 'git'
 url     = node[:play2][:url]
 version = node[:play2][:version]
 
+package "ntp" do
+  action :install
+end
+
 artifact_deploy "play2" do
   version node[:play2][:version]
   artifact_location "#{url}/#{version}/play-#{version}.zip"
