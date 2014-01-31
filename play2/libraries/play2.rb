@@ -3,7 +3,15 @@ def play_options()
 end
 
 def newrelic_app_name()
-  return node[:play2][:conf][:newrelic][:config][:app_name]
+  return node[:play2][:conf][:newrelic_app_name]
+end
+
+def auth_token()
+  return node[:play2][:conf][:authToken]
+end
+
+def db_default_url()
+  return node[:play2][:conf][:database_url]
 end
 
 def default_play_options()

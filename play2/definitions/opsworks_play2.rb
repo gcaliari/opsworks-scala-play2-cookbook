@@ -120,6 +120,8 @@ define :opsworks_play2 do
             :path => app_dir,
             :deploy_to => deploy[:deploy_to],
             :newrelic_app_name => newrelic_app_name(),
+            :authToken => authToken(),
+            :database_url => database_url(),
             :options => play_options()
           })
         end
