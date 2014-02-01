@@ -14,7 +14,7 @@ APP_OPTIONS="<%= @options %>"
 
 
 <% @env_vars.each do |var,value| %>
-export <%= var %>="<%= @value %>"
+export <%= var %>="<%= value %>"
 <% end %>
 
 RETVAL=0
