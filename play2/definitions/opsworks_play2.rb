@@ -107,25 +107,6 @@ define :opsworks_play2 do
           command "sudo play clean compile ; sudo play stage ; true"
         end
 
-        # Create the service for the application
-        template "/etc/init.d/#{application}" do
-          source "app_initd.erb"
-          cookbook "play2"
-          owner "root"
-          group "root"
-          mode  "0755"
-          backup false
-          variables({
-            :name => application,
-            :path => app_dir,
-            :deploy_to => deploy[:deploy_to],
-            :newrelic_app_name => newrelic_app_name(),
-            :auth_token => auth_token(),
-            :database_url => database_url(),
-            :options => play_options()
-          })
-        end
-
         service application do
           supports :status => true, :start => true, :stop => true, :restart => true
           action :enable

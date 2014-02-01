@@ -10,7 +10,7 @@ def auth_token()
   return node[:play2][:conf][:authToken]
 end
 
-def db_default_url()
+def database_url()
   return node[:play2][:conf][:database_url]
 end
 
