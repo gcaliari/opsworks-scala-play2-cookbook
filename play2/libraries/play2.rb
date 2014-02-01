@@ -2,16 +2,8 @@ def play_options()
   return [default_play_options(), node[:play2][:options]].compact.join(" ")
 end
 
-def newrelic_app_name()
-  return node[:play2][:conf][:newrelic_app_name]
-end
-
-def auth_token()
-  return node[:play2][:conf][:authToken]
-end
-
-def database_url()
-  return node[:play2][:conf][:database_url]
+def env_vars()
+  return node[:play2][:env_vars]
 end
 
 def default_play_options()

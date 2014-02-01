@@ -12,9 +12,10 @@ APPLICATION_NAME="<%= @name %>"
 APPLICATION_PATH="<%= @path %>"
 APP_OPTIONS="<%= @options %>"
 
-export NEW_RELIC_APP_NAME="<%= @newrelic_app_name %>"
-export AUTH_TOKEN="<%= @auth_token %>"
-export DATABASE_URL="<%= @database_url %>"
+
+<% @env_vars.each do |var,value| %>
+export <%= var %>="<%= @value %>"
+<% end %>
 
 RETVAL=0
 
