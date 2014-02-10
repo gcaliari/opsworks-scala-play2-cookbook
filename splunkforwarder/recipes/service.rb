@@ -8,6 +8,12 @@
 # Copyright:: Copyright 2012 Splunk, Inc.
 # License:: Apache License 2.0
 #
+# Recipe:: service
+# Cookbook Name:: splunkstorm
+# Source:: https://github.com/ampledata/cookbook-splunkforwarder
+# Author:: Greg Albrecht <mailto:gba@splunk.com>
+# Copyright:: Copyright 2012 Splunk, Inc.
+# License:: Apache License 2.0
 
 
 execute '/opt/splunkforwarder/bin/splunk enable boot-start --accept-license' +
