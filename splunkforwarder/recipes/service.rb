@@ -18,6 +18,11 @@ service 'splunk' do
   supports :status => true, :start => true, :stop => true, :restart => true
 end
 
+remote_file "/opt/splunkforwarder/stormforwarder_91dd83d0927411e3b36f123139097a14.spl" do
+  source "https://s3.amazonaws.com/99taxis-staging-configs/stormforwarder_91dd83d0927411e3b36f123139097a14.spl"
+  action :create_if_missing
+end
+
 execute '/opt/splunkforwarder/bin/splunk install' +
   ' app /opt/splunkforwarder/stormforwarder_91dd83d0927411e3b36f123139097a14.spl' +
   ' -auth admin:changeme' do
