@@ -22,9 +22,8 @@ execute '/opt/splunkforwarder/bin/splunk enable boot-start --accept-license' +
 end
 
 execute '/opt/splunkforwarder/bin/splunk install' +
-  'app /opt/splunkforwarder/stormforwarder_91dd83d0927411e3b36f123139097a14.spl' +
-  '-auth admin:changeme' do
-  command "echo 'running custom credentials'"
+  ' app /opt/splunkforwarder/stormforwarder_91dd83d0927411e3b36f123139097a14.spl' +
+  ' -auth admin:changeme' do
 end
 
 service 'splunk' do
