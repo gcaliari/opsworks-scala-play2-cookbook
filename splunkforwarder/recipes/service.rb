@@ -18,12 +18,18 @@ service 'splunk' do
   supports :status => true, :start => true, :stop => true, :restart => true
 end
 
-remote_file "/opt/splunkforwarder/stormforwarder_91dd83d0927411e3b36f123139097a14.spl" do
-  source "https://s3.amazonaws.com/99taxis-staging-configs/stormforwarder_91dd83d0927411e3b36f123139097a14.spl"
-  action :create_if_missing
+remote_file "/opt/splunkforwarder/app.spl" do
+  source node['splunkforwarder']['spl_app_url']
+  action :create
 end
 
-execute '/opt/splunkforwarder/bin/splunk install' +
-  ' app /opt/splunkforwarder/stormforwarder_91dd83d0927411e3b36f123139097a14.spl' +
-  ' -auth admin:changeme' do
+execute '/opt/splunkforwarder/bin/splunk install app /opt/splunkforwarder/app.spl -auth admin:changeme -update 1'
+
+log_file_name = node['splunkforwarder']['log_path'].split("/").last
+execute "/opt/splunkforwarder/bin/splunk add monitor #{node['splunkforwarder']['log_path']}" do
+  not_if{ File.exist?("/opt/splunkforwarder/monitoring-#{log_file_name}") }
+end
+
+file "/opt/splunkforwarder/monitoring-#{log_file_name}" do
+  action :touch
 end
