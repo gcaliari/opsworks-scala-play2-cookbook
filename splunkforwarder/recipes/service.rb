@@ -13,8 +13,11 @@ execute '/opt/splunkforwarder/bin/splunk enable boot-start --accept-license' +
   not_if{ File.symlink?('/etc/rc4.d/S20splunk') }
 end
 
+# removing old pointers
+execute 'rm -rf /opt/splunkforwarder/var/lib/splunk/fishbucket'
+
 service 'splunk' do
-  action [:start]
+  action [:restart]
   supports :status => true, :start => true, :stop => true, :restart => true
 end
 
