@@ -17,48 +17,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# remove the deprecated Ubuntu jdk packages
-default['java']['remove_deprecated_packages'] = false
-
 # default jdk attributes
-default['java']['install_flavor'] = "openjdk"
-default['java']['jdk_version'] = '7'
+default['java']['jdk_version'] = '6'
 default['java']['arch'] = kernel['machine'] =~ /x86_64/ ? "x86_64" : "i586"
 default['java']['openjdk_packages'] = []
 default['java']['accept_license_agreement'] = false
+default['java']['set_default'] = true
 
 case node['platform_family']
-when "rhel", "fedora"
-  default['java']['java_home'] = "/usr/lib/jvm/java"
-  default['java']['openjdk_packages'] = ["java-1.#{node['java']['jdk_version']}.0-openjdk", "java-1.#{node['java']['jdk_version']}.0-openjdk-devel"]
-when "freebsd"
-  default['java']['java_home'] = "/usr/local/openjdk#{node['java']['jdk_version']}"
-  default['java']['openjdk_packages'] = ["openjdk#{node['java']['jdk_version']}"]
-when "arch"
-  default['java']['java_home'] = "/usr/lib/jvm/java-#{node['java']['jdk_version']}-openjdk"
-  default['java']['openjdk_packages'] = ["openjdk#{node['java']['jdk_version']}}"]
 when "windows"
   default['java']['install_flavor'] = "windows"
   default['java']['windows']['url'] = nil
   default['java']['windows']['checksum'] = nil
   default['java']['windows']['package_name'] = "Java(TM) SE Development Kit 7 (64-bit)"
-when "debian"
-  default['java']['java_home'] = "/usr/lib/jvm/java-#{node['java']['jdk_version']}-#{node['java']['install_flavor']}-#{node['kernel']['machine'] == 'x86_64' ? 'amd64' : 'i386'}"
-  default['java']['openjdk_packages'] = ["openjdk-#{node['java']['jdk_version']}-jdk", "openjdk-#{node['java']['jdk_version']}-jre-headless"]
-when "smartos"
-  default['java']['java_home'] = "/opt/local/java/sun6"
-  default['java']['openjdk_packages'] = ["sun-jdk#{node['java']['jdk_version']}", "sun-jre#{node['java']['jdk_version']}"]
 else
-  default['java']['java_home'] = "/usr/lib/jvm/default-java"
-  default['java']['openjdk_packages'] = ["openjdk-#{node['java']['jdk_version']}-jdk"]
+  default['java']['install_flavor'] = "openjdk"
 end
 
 case node['java']['install_flavor']
-when 'ibm'
+when 'ibm', 'ibm_tar'
   default['java']['ibm']['url'] = nil
   default['java']['ibm']['checksum'] = nil
   default['java']['ibm']['accept_ibm_download_terms'] = false
   default['java']['java_home'] = "/opt/ibm/java"
+
+  default['java']['ibm']['6']['bin_cmds'] = [ "appletviewer", "apt", "ControlPanel", "extcheck", "HtmlConverter", "idlj", "jar", "jarsigner",
+                                              "java", "javac", "javadoc", "javah", "javap", "javaws", "jconsole", "jcontrol", "jdb", "jdmpview",
+                                              "jrunscript", "keytool", "native2ascii", "policytool", "rmic", "rmid", "rmiregistry",
+                                              "schemagen", "serialver", "tnameserv", "wsgen", "wsimport", "xjc" ]
+
+  default['java']['ibm']['7']['bin_cmds'] = node['java']['ibm']['6']['bin_cmds'] + [ "pack200", "unpack200" ]
 when 'oracle_rpm'
   default['java']['oracle_rpm']['type'] = 'jdk'
   default['java']['java_home'] = "/usr/java/latest"
