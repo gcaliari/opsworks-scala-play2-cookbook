@@ -1,0 +1,6 @@
+name             'layer'
+maintainer       '99Taxis'
+maintainer_email 'dev@99taxis.com'
+license          'All rights reserved'
+description      'Sets LAYER to web, background or all'
+version          '0.0.1'

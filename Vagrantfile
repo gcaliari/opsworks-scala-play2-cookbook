@@ -96,15 +96,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "."
-    chef.add_recipe "splunkforwarder"
+    chef.add_recipe "play2::setup"
+    chef.add_recipe "play2::deploy"
         
     # You may also specify custom JSON attributes:
-    chef.json = { 
-		'splunkforwarder' => { 
-			'spl_app_url' => 'https://s3.amazonaws.com/99taxis-staging-configs/stormforwarder_91dd83d0927411e3b36f123139097a14.spl',
-		'log_path' => '/opt/splunkforwarder/file.log',
-		}
-	}
+    # chef.json = { 
+    # 		'splunkforwarder' => { 
+    # 			'spl_app_url' => 'https://s3.amazonaws.com/99taxis-staging-configs/stormforwarder_91dd83d0927411e3b36f123139097a14.spl',
+    # 		'log_path' => '/opt/splunkforwarder/file.log',
+    # 		}
+    # 	}
   end
 
   

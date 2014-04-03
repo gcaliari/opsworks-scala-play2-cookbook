@@ -3,7 +3,16 @@ def play_options()
 end
 
 def env_vars()
-  return node[:play2][:env_vars]
+  vars = {}
+  if node[:play2][:external_env_vars_file]
+    file = File.new(node[:play2][:external_env_vars_file], "r")
+    file.each_line do |line|
+      var = line.chomp.split("=")
+      vars = vars.merge({ var[0] => var[1] }) if var
+    end
+    file.close
+  end  
+  return vars.merge(node[:play2][:env_vars])
 end
 
 def default_play_options()
