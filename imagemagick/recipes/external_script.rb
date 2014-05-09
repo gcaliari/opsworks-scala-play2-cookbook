@@ -1,0 +1,1 @@
+execute "sudo chmod +x #{node[:imagemagick][:external_script][:location]}"
