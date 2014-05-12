@@ -44,7 +44,9 @@ JAVA_OPTS="<%= node['opsworks_java']['tomcat']['java_opts'] %>"
 # (yes/no, default: no)
 #AUTHBIND=no
 
-TAXIS_CONFIG=/usr/share/tomcat7/webapps/server_admin/WEB-INF/classes/conf/staging/config.properties
+# defining custom variable
+# TAXIS_CONFIG=/usr/share/tomcat7/webapps/server_admin/WEB-INF/classes/conf/staging/config.properties
+#
 
 <% if node['opsworks_java']['tomcat']['base_version'].to_i < 7 -%>
 # Unset LC_ALL to prevent user environment executing the init script from
