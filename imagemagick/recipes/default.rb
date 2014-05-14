@@ -23,4 +23,5 @@ when 'rhel'
 when 'debian', 'mac_os_x'
   package 'imagemagick'
   package 'libjpeg-progs' 
+  package 'jhead'
 end
