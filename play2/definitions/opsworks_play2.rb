@@ -121,4 +121,11 @@ define :opsworks_play2 do
       user "root"
       command "sudo service #{application} restart"
     end
+    
+    file "/srv/www/#{application}/current/target/universal/stage/logs/application.log" do
+      owner deploy[:user]
+      mode 0755
+      action :create_if_missing
+    end
+
 end
