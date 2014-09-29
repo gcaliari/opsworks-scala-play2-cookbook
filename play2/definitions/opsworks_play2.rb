@@ -91,6 +91,24 @@ define :opsworks_play2 do
           command "sudo play clean compile ; sudo play stage ; true"
         end
 
+        %w[ target target/universal target/universal/stage target/universal/stage/logs ].each do |path|
+          directory path do
+          cwd app_dir
+            owner deploy[:user]
+            mode 0755
+            action :create
+          end
+        end
+
+    
+        file "target/universal/stage/logs/application.log" do
+          cwd app_dir
+          owner deploy[:user]
+          mode 0755
+          action :create_if_missing
+        end
+
+
         # Create the service for the application
         template "/etc/init.d/#{application}" do
           source "app_initd.erb"
@@ -121,20 +139,4 @@ define :opsworks_play2 do
       user "root"
       command "sudo service #{application} restart"
     end
-    
-    %w[ /srv/www/#{application}/current/target /srv/www/#{application}/current/target/universal /srv/www/#{application}/current/target/universal/stage /srv/www/#{application}/current/target/universal/stage/logs ].each do |path|
-      directory path do
-        owner deploy[:user]
-        mode 0755
-        action :create
-      end
     end
-
-    
-    file "/srv/www/#{application}/current/target/universal/stage/logs/application.log" do
-      owner deploy[:user]
-      mode 0755
-      action :create_if_missing
-    end
-
-end
