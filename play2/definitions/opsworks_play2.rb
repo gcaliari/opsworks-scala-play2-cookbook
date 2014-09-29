@@ -122,6 +122,15 @@ define :opsworks_play2 do
       command "sudo service #{application} restart"
     end
     
+    %w[ /srv/www/#{application}/current/target /srv/www/#{application}/current/target/universal /srv/www/#{application}/current/target/universal/stage /srv/www/#{application}/current/target/universal/stage/logs ].each do |path|
+      directory path do
+        owner deploy[:user]
+        mode 0755
+        action :create
+      end
+    end
+
+    
     file "/srv/www/#{application}/current/target/universal/stage/logs/application.log" do
       owner deploy[:user]
       mode 0755
