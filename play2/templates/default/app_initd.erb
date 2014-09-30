@@ -23,6 +23,9 @@ RETVAL=0
 [ -f $APPLICATION_PATH/logs/service.log ] || touch $APPLICATION_PATH/logs/service.log
 
 start() {
+
+	(cd ${APPLICATION_PATH}; su $USER -c "mkdir target"; su $USER -c "mkdir target/universal"; su $USER -c "mkdir target/universal/stage"; su $USER -c "mkdir target/universal/stage/logs"; su $USER -c "touch target/universal/stage/logs/application.log")
+
     echo -n "Starting Play service: <%= @name %>" | tee -a $APPLICATION_PATH/logs/service.log
     (cd ${APPLICATION_PATH}; su $USER -c "target/universal/stage/bin/${APPLICATION_NAME} ${APP_OPTIONS} >> ${APPLICATION_PATH}/logs/service.log 2>&1 &")
     RETVAL=$?
