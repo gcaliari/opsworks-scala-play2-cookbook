@@ -91,7 +91,7 @@ define :opsworks_play2 do
           command "sudo play clean compile ; sudo play stage ; true"
         end
 
-        %w[ "#{app_dir}/target" "#{app_dir}/target/universal" "#{app_dir}/target/universal/stage" "#{app_dir}/target/universal/stage/logs" ].each do |path|
+        %w[ "#{deploy[:scm][:app_dir]}/target" "#{deploy[:scm][:app_dir]}/target/universal" "#{deploy[:scm][:app_dir]}/target/universal/stage" "#{deploy[:scm][:app_dir]}/target/universal/stage/logs" ].each do |path|
           directory path do
             owner deploy[:user]
             mode 0755
@@ -100,7 +100,7 @@ define :opsworks_play2 do
         end
 
     
-        file "#{app_dir}/target/universal/stage/logs/application.log" do
+        file "#{deploy[:scm][:app_dir]}/target/universal/stage/logs/application.log" do
           owner deploy[:user]
           mode 0755
           action :create_if_missing
