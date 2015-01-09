@@ -36,10 +36,10 @@ case $DEPLOY_ENV in
 		;;
 	production )
 		case $APP in
-		    PaymentsWeb ) APPLICATION='server_payments'; STACK_NAME='payments'; LAYER_NAME='play2'; 
-			PaymentsBG ) APPLICATION='server_payments'; STACK_NAME='payments'; LAYER_NAME='play2-background'; 
-			CorporateWeb ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2'; 
-			CorporateBG ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2-background'; 
+		    PaymentsWeb ) APPLICATION='server_payments'; STACK_NAME='payments'; LAYER_NAME='play2'; break;;
+			PaymentsBG ) APPLICATION='server_payments'; STACK_NAME='payments'; LAYER_NAME='play2-background'; break;;
+			CorporateWeb ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2'; break;;
+			CorporateBG ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2-background'; break;; 
 			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME='promotions'; LAYER_NAME='play2';
 		esac
 esac
