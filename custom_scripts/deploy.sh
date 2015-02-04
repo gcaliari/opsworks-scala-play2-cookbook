@@ -13,13 +13,14 @@ done
 echo ''
 echo ''
 echo "=======>  APPLICATION TO DEPLOY:"
-select yn in "PaymentsWeb" "PaymentsBG" "CorporateWeb" "CorporateBG" "PromotionsWeb"; do
+select yn in "PaymentsWeb" "PaymentsBG" "CorporateWeb" "CorporateBG" "PromotionsWeb" "FinanceWeb"; do
     case $yn in
         PaymentsWeb ) APP='PaymentsWeb';  break;;
         PaymentsBG ) APP='PaymentsBG';  break;;
 		CorporateWeb ) APP='CorporateWeb';  break;;
 		CorporateBG ) APP='CorporateBG';  break;;
 		PromotionsWeb ) APP='PromotionsWeb';  break;;
+		FinanceWeb ) APP='FinanceWeb';  break;;
     esac
 done
 
@@ -31,7 +32,8 @@ case $DEPLOY_ENV in
 		case $APP in
 		    PaymentsWeb ) APPLICATION='server_payments'; STACK_NAME='paymentsstaging'; LAYER_NAME='play2'; break;;
 			CorporateWeb ) APPLICATION='server_corporate'; STACK_NAME="corporatestaging"; LAYER_NAME='play2'; break;;
-			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME="promotionsstaging"; LAYER_NAME='play2';
+			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME="promotionsstaging"; LAYER_NAME='play2'; break;;
+			FinanceWeb ) APPLICATION='server_finance'; STACK_NAME="financestaging"; LAYER_NAME='play2';
 		esac
 		;;
 	production )
@@ -40,7 +42,8 @@ case $DEPLOY_ENV in
 			PaymentsBG ) APPLICATION='server_payments'; STACK_NAME='payments'; LAYER_NAME='play2-background'; break;;
 			CorporateWeb ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2'; break;;
 			CorporateBG ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2-background'; break;; 
-			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME='promotions'; LAYER_NAME='play2';
+			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME='promotions'; LAYER_NAME='play2'; break;;
+			FinanceWeb ) APPLICATION='server_finance'; STACK_NAME="finance"; LAYER_NAME='play2';
 		esac
 esac
 
