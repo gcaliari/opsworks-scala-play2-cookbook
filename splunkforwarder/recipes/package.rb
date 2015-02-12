@@ -70,9 +70,7 @@ http_request 'splunkforwarder: Check Package URL' do
     headers 'If-Modified-Since' => ::File.mtime(package_download_path).httpdate
   end
   message ''
-  notifies(:create,
-           resources(:remote_file => 'splunkforwarder: Download Package'),
-           :immediately)
+  notifies(:create, resources(:remote_file => 'splunkforwarder: Download Package'), :immediately)
   url package_url
 end
 

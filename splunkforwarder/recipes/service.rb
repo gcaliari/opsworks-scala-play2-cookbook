@@ -21,15 +21,14 @@ service 'splunk' do
   supports :status => true, :start => true, :stop => true, :restart => true
 end
 
-remote_file "/opt/splunkforwarder/app.spl" do
-  source node['splunkforwarder']['spl_app_url']
-  action :create
+host_port = "#{node['splunkforwarder']['receiver_host']}:#{node['splunkforwarder']['receiver_host_port']}"
+execute "/opt/splunkforwarder/bin/splunk add forward-server #{host_port} -auth admin:changeme" do
+  not_if{ "/opt/splunkforwarder/bin/splunk list forward-server -auth admin:changeme | grep #{host_port}"}
 end
 
-execute '/opt/splunkforwarder/bin/splunk install app /opt/splunkforwarder/app.spl -auth admin:changeme -update 1'
-
+index_name = node['splunkforwarder']['index_name']
 log_file_name = node['splunkforwarder']['log_path'].split("/").last
-execute "/opt/splunkforwarder/bin/splunk add monitor #{node['splunkforwarder']['log_path']}" do
+execute "/opt/splunkforwarder/bin/splunk add monitor #{node['splunkforwarder']['log_path']} -auth admin:changeme -index #{index_name} -check-index true" do
   not_if{ File.exist?("/opt/splunkforwarder/monitoring-#{log_file_name}") }
 end
 
