@@ -23,7 +23,11 @@ end
 
 host_port = "#{node['splunkforwarder']['receiver_host']}:#{node['splunkforwarder']['receiver_host_port']}"
 execute "/opt/splunkforwarder/bin/splunk add forward-server #{host_port} -auth admin:changeme" do
-  not_if{ File.exist?("/opt/splunkforwarder/monitoring-#{log_file_name}" }
+  not_if{ File.exist?("/opt/splunkforwarder/forward-server-#{host_port}" }
+end
+
+file "/opt/splunkforwarder/forward-server-#{host_port}" do
+  action :touch
 end
 
 index_name = node['splunkforwarder']['index_name']
