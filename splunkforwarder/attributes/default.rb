@@ -10,7 +10,7 @@
 
 
 default['splunkforwarder']['download_url'] = 'http://download.splunk.com/releases'
-default['splunkforwarder']['build'] = '140868'
-default['splunkforwarder']['version'] = '5.0'
+default['splunkforwarder']['build'] = '220630'
+default['splunkforwarder']['version'] = '6.1.3'
 #default['splunkforwarder']['receiver_host'] = 'server_host'
 #default['splunkforwarder']['receiver_host_port'] = 'server_port'
