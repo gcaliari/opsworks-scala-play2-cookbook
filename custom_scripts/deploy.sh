@@ -13,7 +13,7 @@ done
 echo ''
 echo ''
 echo "=======>  APPLICATION TO DEPLOY:"
-select yn in "PaymentsWeb" "PaymentsBG" "CorporateWeb" "CorporateBG" "PromotionsWeb" "FinanceWeb"; do
+select yn in "PaymentsWeb" "PaymentsBG" "CorporateWeb" "CorporateBG" "PromotionsWeb" "FinanceWeb" "JobsWeb"; do
     case $yn in
         PaymentsWeb ) APP='PaymentsWeb';  break;;
         PaymentsBG ) APP='PaymentsBG';  break;;
@@ -21,6 +21,7 @@ select yn in "PaymentsWeb" "PaymentsBG" "CorporateWeb" "CorporateBG" "Promotions
 		CorporateBG ) APP='CorporateBG';  break;;
 		PromotionsWeb ) APP='PromotionsWeb';  break;;
 		FinanceWeb ) APP='FinanceWeb';  break;;
+		JobsWeb ) APP='JobsWeb';  break;;
     esac
 done
 
@@ -33,7 +34,8 @@ case $DEPLOY_ENV in
 		    PaymentsWeb ) APPLICATION='server_payments'; STACK_NAME='paymentsstaging'; LAYER_NAME='play2'; break;;
 			CorporateWeb ) APPLICATION='server_corporate'; STACK_NAME="corporatestaging"; LAYER_NAME='play2'; break;;
 			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME="promotionsstaging"; LAYER_NAME='play2'; break;;
-			FinanceWeb ) APPLICATION='server_finance'; STACK_NAME="financestaging"; LAYER_NAME='play2';
+			FinanceWeb ) APPLICATION='server_finance'; STACK_NAME="financestaging"; LAYER_NAME='play2'; break;;
+			JobsWeb ) APPLICATION='server_taxijobs'; STACK_NAME="taxijobsstaging"; LAYER_NAME='play2';
 		esac
 		;;
 	production )
@@ -43,7 +45,8 @@ case $DEPLOY_ENV in
 			CorporateWeb ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2'; break;;
 			CorporateBG ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2-background'; break;; 
 			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME='promotions'; LAYER_NAME='play2'; break;;
-			FinanceWeb ) APPLICATION='server_finance'; STACK_NAME="finance"; LAYER_NAME='play2';
+			FinanceWeb ) APPLICATION='server_finance'; STACK_NAME="finance"; LAYER_NAME='play2'; break;;
+			JobsWeb ) APPLICATION='server_taxijobs'; STACK_NAME="taxijobs"; LAYER_NAME='play2';
 		esac
 esac
 
