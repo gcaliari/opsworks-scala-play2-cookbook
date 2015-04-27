@@ -30,6 +30,11 @@ file "/opt/splunkforwarder/forward-server-#{host_port}" do
   action :touch
 end
 
+# it creates the file if does not exist
+file "#{node['splunkforwarder']['log_path']}" do
+  action :touch
+end
+
 index_name = node['splunkforwarder']['index_name']
 log_file_name = node['splunkforwarder']['log_path'].split("/").last
 execute "/opt/splunkforwarder/bin/splunk add monitor #{node['splunkforwarder']['log_path']} -auth admin:changeme -index #{index_name} -check-index true" do
