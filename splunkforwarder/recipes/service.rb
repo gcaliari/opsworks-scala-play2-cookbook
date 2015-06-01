@@ -41,7 +41,7 @@ else
   file = node['splunkforwarder']['log_path']
   path = file
   file "#{path}" do
-    mode "g+wr-x,o-rw-x,a+rw-x #{path}"
+    mode "666"
     action :touch
   end
   log_file_name = file.split("/").last
@@ -49,27 +49,27 @@ else
     not_if{ File.exist?("/opt/splunkforwarder/monitoring-#{log_file_name}") }
   end
   file "/opt/splunkforwarder/monitoring-#{log_file_name}" do
-    mode "g+wr-x,o-rw-x,a+rw-x #{path}"
+    mode "666"
     action :touch
   end
 end
 
-def add_monitoring(file, index_name)
-  touch_file(file)
-  log_file_name = file.split("/").last
-  execute "/opt/splunkforwarder/bin/splunk add monitor #{file} -auth admin:changeme -index #{index_name} -check-index true" do
-    not_if{ File.exist?("/opt/splunkforwarder/monitoring-#{log_file_name}") }
-  end
-  touch_file("/opt/splunkforwarder/monitoring-#{log_file_name}")
-end
+# def add_monitoring(file, index# _name)
+#   touch_file(file)
+#   log_file_name = file.split("/").last
+#   execute "/opt/splunkforwarder/bin/splunk add monitor #{file} -auth admin:changeme -index #{index_name} -check-index true" do
+#     not_if{ File.exist?("/opt/splunkforwarder/monitoring-#{log_file_name}") }
+#   end
+#   touch_file("/opt/splunkforwarder/monitoring-#{log_file_name}")
+# end
 
 # it creates the file if does not exist
-def touch_file(path)
-  file "#{path}" do
-    mode "g+wr-x,o-rw-x,a+rw-x #{path}"
-    action :touch
-  end
-end
+# def touch_file(path)
+#   file "#{path}" do
+#     mode "g+wr-x,o-rw-x,a+rw-x"
+#     action :touch
+#   end
+# end
 
 
 # file "#{node['splunkforwarder']['log_path']}" do
