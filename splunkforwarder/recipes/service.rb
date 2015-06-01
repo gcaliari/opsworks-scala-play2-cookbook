@@ -37,10 +37,24 @@ if files
     add_monitoring(file, index_name)
   end
 else
-  add_monitoring(node['splunkforwarder']['log_path'], index_name)
+  # add_monitoring(node['splunkforwarder']['log_path'], index_name)
+  file = node['splunkforwarder']['log_path']
+  path = file
+  file "#{path}" do
+    mode "g+wr-x,o-rw-x,a+rw-x #{path}"
+    action :touch
+  end
+  log_file_name = file.split("/").last
+  execute "/opt/splunkforwarder/bin/splunk add monitor #{file} -auth admin:changeme -index #{index_name} -check-index true" do
+    not_if{ File.exist?("/opt/splunkforwarder/monitoring-#{log_file_name}") }
+  end
+  file "/opt/splunkforwarder/monitoring-#{log_file_name}" do
+    mode "g+wr-x,o-rw-x,a+rw-x #{path}"
+    action :touch
+  end
 end
 
-def self.add_monitoring(file, index_name)
+def add_monitoring(file, index_name)
   touch_file(file)
   log_file_name = file.split("/").last
   execute "/opt/splunkforwarder/bin/splunk add monitor #{file} -auth admin:changeme -index #{index_name} -check-index true" do
@@ -50,7 +64,7 @@ def self.add_monitoring(file, index_name)
 end
 
 # it creates the file if does not exist
-def self.touch_file(path)
+def touch_file(path)
   file "#{path}" do
     mode "g+wr-x,o-rw-x,a+rw-x #{path}"
     action :touch
