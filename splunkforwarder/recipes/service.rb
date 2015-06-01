@@ -52,6 +52,7 @@ end
 # it creates the file if does not exist
 def touch_file(path)
   file "#{path}" do
+    mode "g+wr-x,o-rw-x,a+rw-x #{path}"
     action :touch
   end
 end
