@@ -13,7 +13,7 @@ end
 depends 'python'
 depends 'curl'
 depends 'apt', '~> 2.0'
-depends 'yum', '~> 3.0'
+#depends 'yum', '~> 3.0'
 
 recipe 'newrelic', 'Adds the New Relic repository, installs & configures the New Relic server monitor agent.'
 recipe 'newrelic::repository', 'Adds the New Relic repository.'
