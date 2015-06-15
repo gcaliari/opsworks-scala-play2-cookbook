@@ -10,7 +10,7 @@ version '2.12.2'
   supports os
 end
 
-depends 'python'
+#depends 'python'
 depends 'curl'
 depends 'apt', '~> 2.0'
 #depends 'yum', '~> 3.0'
@@ -22,5 +22,5 @@ recipe 'newrelic::dotnet_agent', 'Installs New Relic .NET agent.'
 recipe 'newrelic::java_agent', 'Installs the New Relic Java agent.'
 recipe 'newrelic::nodejs_agent', 'Installs New Relic Node.js agent.'
 recipe 'newrelic::php_agent', 'Installs the New Relic PHP agent.'
-recipe 'newrelic::python_agent', 'Installs the New Relic Python agent.'
+#recipe 'newrelic::python_agent', 'Installs the New Relic Python agent.'
 recipe 'newrelic::ruby_agent', 'Installs the New Relic Ruby agent.'
