@@ -6,3 +6,7 @@ It is based on play2 cookbook by [Originate](https://github.com/Originate/cookbo
 
 A few minor modifications were needed to update the deploy and execution commands. 
 
+
+Important Notes :: Troubles
+----------------------------
+This version of cookbook (v1.0.11) is tested only with Ubuntu 12.04 LTS and use Chef 11.04. Beware when setting up the AWS Stack and instances.
