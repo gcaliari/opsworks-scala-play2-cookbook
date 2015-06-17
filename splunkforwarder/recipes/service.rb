@@ -30,17 +30,58 @@ file "/opt/splunkforwarder/forward-server-#{host_port}" do
   action :touch
 end
 
-# it creates the file if does not exist
-file "#{node['splunkforwarder']['log_path']}" do
-  action :touch
-end
-
 index_name = node['splunkforwarder']['index_name']
-log_file_name = node['splunkforwarder']['log_path'].split("/").last
-execute "/opt/splunkforwarder/bin/splunk add monitor #{node['splunkforwarder']['log_path']} -auth admin:changeme -index #{index_name} -check-index true" do
-  not_if{ File.exist?("/opt/splunkforwarder/monitoring-#{log_file_name}") }
+files = node['splunkforwarder']['files']
+if files
+  files.each do |file|
+    add_monitoring(file, index_name)
+  end
+else
+  # add_monitoring(node['splunkforwarder']['log_path'], index_name)
+  file = node['splunkforwarder']['log_path']
+  path = file
+  file "#{path}" do
+    mode "666"
+    action :touch
+  end
+  log_file_name = file.split("/").last
+  execute "/opt/splunkforwarder/bin/splunk add monitor #{file} -auth admin:changeme -index #{index_name} -check-index true" do
+    not_if{ File.exist?("/opt/splunkforwarder/monitoring-#{log_file_name}") }
+  end
+  file "/opt/splunkforwarder/monitoring-#{log_file_name}" do
+    mode "666"
+    action :touch
+  end
 end
 
-file "/opt/splunkforwarder/monitoring-#{log_file_name}" do
-  action :touch
-end
+# def add_monitoring(file, index# _name)
+#   touch_file(file)
+#   log_file_name = file.split("/").last
+#   execute "/opt/splunkforwarder/bin/splunk add monitor #{file} -auth admin:changeme -index #{index_name} -check-index true" do
+#     not_if{ File.exist?("/opt/splunkforwarder/monitoring-#{log_file_name}") }
+#   end
+#   touch_file("/opt/splunkforwarder/monitoring-#{log_file_name}")
+# end
+
+# it creates the file if does not exist
+# def touch_file(path)
+#   file "#{path}" do
+#     mode "g+wr-x,o-rw-x,a+rw-x"
+#     action :touch
+#   end
+# end
+
+
+# file "#{node['splunkforwarder']['log_path']}" do
+#   action :touch
+# end
+
+# index_name = node['splunkforwarder']['index_name']
+# log_file_name = node['splunkforwarder']['log_path'].split("/").last
+# execute "/opt/splunkforwarder/bin/splunk add monitor #{node['splunkforwarder']['log_path']} -auth admin:changeme -index #{index_name} -check-index true" do
+#   not_if{ File.exist?("/opt/splunkforwarder/monitoring-#{log_file_name}") }
+# end
+
+# file "/opt/splunkforwarder/monitoring-#{log_file_name}" do
+#   action :touch
+# end

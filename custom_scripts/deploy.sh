@@ -13,16 +13,17 @@ done
 echo ''
 echo ''
 echo "=======>  APPLICATION TO DEPLOY:"
-select yn in "PaymentsWeb" "PaymentsBG" "CorporateWeb" "CorporateAPI" "CorporateBG" "PromotionsWeb" "FinanceWeb" "JobsWeb"; do
+select yn in "PaymentsWeb" "PaymentsBG" "CorporateWeb" "CorporateAPI" "CorporateBG" "PromotionsWeb" "PromotionsBG" "FinanceWeb" "JobsWeb"; do
     case $yn in
         PaymentsWeb ) APP='PaymentsWeb';  break;;
         PaymentsBG ) APP='PaymentsBG';  break;;
-        CorporateWeb ) APP='CorporateWeb';  break;;
-        CorporateAPI ) APP='CorporateAPI';  break;;
-    		CorporateBG ) APP='CorporateBG';  break;;
-        PromotionsWeb ) APP='PromotionsWeb';  break;;
-        FinanceWeb ) APP='FinanceWeb';  break;;
-        JobsWeb ) APP='JobsWeb';  break;;
+		CorporateWeb ) APP='CorporateWeb';  break;;
+		CorporateAPI ) APP='CorporateAPI';  break;;
+		CorporateBG ) APP='CorporateBG';  break;;
+		PromotionsWeb ) APP='PromotionsWeb';  break;;
+		PromotionsBG ) APP='PromotionsBG';  break;;
+		FinanceWeb ) APP='FinanceWeb';  break;;
+		JobsWeb ) APP='JobsWeb';  break;;
     esac
 done
 
@@ -30,11 +31,11 @@ echo ''
 echo ''
 read -p "VERSION TO DEPLOY (ex: v1.1.1): " APP_VERSION
 case $DEPLOY_ENV in
-    staging )
+	staging )
 		case $APP in
-		    PaymentsWeb ) APPLICATION='server_payments'; STACK_NAME='paymentsstaging'; LAYER_NAME='play2'; break;;
+			PaymentsWeb ) APPLICATION='server_payments'; STACK_NAME='paymentsstaging'; LAYER_NAME='play2'; break;;
 			CorporateWeb ) APPLICATION='server_corporate'; STACK_NAME="corporatestaging"; LAYER_NAME='play2'; break;;
-      CorporateAPI ) APPLICATION='server_corporate'; STACK_NAME='corporatestaging'; LAYER_NAME='play2-api'; break;;
+            CorporateAPI ) APPLICATION='server_corporate'; STACK_NAME='corporatestaging'; LAYER_NAME='play2-api'; break;;
 			CorporateBG ) APPLICATION='server_corporate'; STACK_NAME='corporatestaging'; LAYER_NAME='play2-background'; break;;
 			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME="promotionsstaging"; LAYER_NAME='play2'; break;;
 			FinanceWeb ) APPLICATION='server_finance'; STACK_NAME="financestaging"; LAYER_NAME='play2'; break;;
@@ -43,12 +44,13 @@ case $DEPLOY_ENV in
 		;;
 	production )
 		case $APP in
-		    PaymentsWeb ) APPLICATION='server_payments'; STACK_NAME='payments'; LAYER_NAME='play2'; break;;
+			PaymentsWeb ) APPLICATION='server_payments'; STACK_NAME='payments'; LAYER_NAME='play2'; break;;
 			PaymentsBG ) APPLICATION='server_payments'; STACK_NAME='payments'; LAYER_NAME='play2-background'; break;;
 			CorporateWeb ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2'; break;;
-      CorporateAPI ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2-api'; break;;
+            CorporateAPI ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2-api'; break;;
 			CorporateBG ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2-background'; break;;
 			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME='promotions'; LAYER_NAME='play2'; break;;
+			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME='promotions'; LAYER_NAME='play2-background'; break;;
 			FinanceWeb ) APPLICATION='server_finance'; STACK_NAME="finance"; LAYER_NAME='play2'; break;;
 			JobsWeb ) APPLICATION='server_taxijobs'; STACK_NAME="taxijobs"; LAYER_NAME='play2';
 		esac
