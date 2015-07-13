@@ -12,7 +12,6 @@ version           = node[:play2][:version]
 activator_version = node[:play2][:activator_version]
 activator_url     = node[:play2][:activator_url]
 activator         = node[:play2][:activator]
-activator1_3      = node[:play2][:activator1_3]
 
 package "ntp" do
   action :install
@@ -24,13 +23,9 @@ download_path = "#{url}/#{version}/play-#{version}.zip"
 play_version  = node[:play2][:version]
 
 if activator
-  program_path = "activator-#{activator_version}/activator"
+  program_path = "activator-dist-#{activator_version}/activator"
   download_path = "#{activator_url}/#{activator_version}/typesafe-activator-#{activator_version}.zip"
   play_version  = node[:play2][:activator_version]
-end
-
-if activator1_3
-  program_path = "activator-dist-#{activator_version}/activator"
 end
 
 artifact_deploy "play2" do
