@@ -12,6 +12,7 @@ version           = node[:play2][:version]
 activator_version = node[:play2][:activator_version]
 activator_url     = node[:play2][:activator_url]
 activator         = node[:play2][:activator]
+activator1_3      = node[:play2][:activator1_3]
 
 package "ntp" do
   action :install
@@ -28,6 +29,9 @@ if activator
   play_version  = node[:play2][:activator_version]
 end
 
+if activator1_3
+  program_path = "activator-dist-#{activator_version}/activator"
+end
 
 artifact_deploy "play2" do
   version play_version
