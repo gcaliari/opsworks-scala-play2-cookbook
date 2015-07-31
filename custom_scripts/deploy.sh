@@ -50,7 +50,7 @@ case $DEPLOY_ENV in
             CorporateAPI ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2-api'; break;;
 			CorporateBG ) APPLICATION='server_corporate'; STACK_NAME='corporate'; LAYER_NAME='play2-background'; break;;
 			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME='promotions'; LAYER_NAME='play2'; break;;
-			PromotionsWeb ) APPLICATION='server_promotions'; STACK_NAME='promotions'; LAYER_NAME='play2-background'; break;;
+			PromotionsBG ) APPLICATION='server_promotions'; STACK_NAME='promotions'; LAYER_NAME='play2-background'; break;;
 			FinanceWeb ) APPLICATION='server_finance'; STACK_NAME="finance"; LAYER_NAME='play2'; break;;
 			JobsWeb ) APPLICATION='server_taxijobs'; STACK_NAME="taxijobs"; LAYER_NAME='play2';
 		esac
